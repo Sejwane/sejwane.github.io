@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neo Blessing Sejwane - Junior Full-Stack Developer Portfolio">
+    <title>Neo Blessing Sejwane | Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #030305;
+            --bg-surface: #0a0a0f;
+            --bg-panel: rgba(255, 255, 255, 0.03);
+            --neon-primary: #00ff66;
+            --neon-secondary: #ff0055;
+            --neon-accent: #00e5ff;
+            --neon-yellow: #ffcc00;
+            --text-main: #e2e8f0;
+            --text-muted: #a1b0c7; 
+            --grid-color: rgba(255, 255, 255, 0.04);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base); color: var(--text-main);
+            font-family: 'Inter', sans-serif; line-height: 1.7; overflow-x: hidden;
+            cursor: crosshair;
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        a, button, input, textarea, .pyramid-tier { cursor: pointer; }
+        h1, h2, h3, .mono { font-family: 'Fira Code', monospace; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- Sticky Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 2rem;
+            background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(12px); z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+        }
+        .logo { font-weight: 800; font-size: 1.2rem; color: #fff; letter-spacing: -1px; font-family: 'Fira Code', monospace; position: relative;}
+        .logo span { color: var(--neon-primary); }
+        .logo:hover { animation: glitch 0.2s linear infinite; }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 var(--neon-secondary), -2px 0 var(--neon-accent); }
+            25% { text-shadow: -2px 0 var(--neon-secondary), 2px 0 var(--neon-accent); }
+            50% { text-shadow: 2px 0 var(--neon-secondary), -2px 0 var(--neon-accent); }
+            75% { text-shadow: -2px 0 var(--neon-secondary), 2px 0 var(--neon-accent); }
+            100% { text-shadow: 2px 0 var(--neon-secondary), -2px 0 var(--neon-accent); }
+        }
+
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none; margin-left: 2.2rem;
+            font-family: 'Fira Code', monospace; font-size: 0.85rem; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--neon-primary); }
+        
+        .contact-quick { border: 1px solid var(--neon-primary); padding: 5px 15px; border-radius: 4px; color: var(--neon-primary) !important; }
+        .btn-resume { border: 1px dashed var(--neon-accent); padding: 5px 15px; border-radius: 4px; color: var(--neon-accent) !important; transition: all 0.3s ease;}
+        .btn-resume:hover { background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 10px rgba(0, 229, 255, 0.3); }
+
+        /* --- HERO SECTION --- */
+        .hero { 
+            min-height: 85vh; display: grid; grid-template-columns: 1fr 1.3fr; 
+            gap: 3rem; align-items: center; padding-top: 6rem; padding-bottom: 2rem;
+        }
+
+        .hero-identity { display: flex; flex-direction: column; gap: 1.2rem; }
+        
+        .avatar-container {
+            width: 140px; height: 140px; border-radius: 50%; padding: 4px;
+            background: linear-gradient(45deg, var(--neon-primary), var(--neon-accent));
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #111; }
+
+        .hero-identity h1 { font-size: 3rem; color: #fff; line-height: 1.1; letter-spacing: -1px; }
+        .hero-identity h1 span { color: var(--neon-primary); }
+        .hero-identity h2 { font-size: 1.15rem; color: var(--text-muted); font-family: 'Inter', sans-serif; font-weight: 400; margin-bottom: 0.5rem;}
+
+        .cta-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; }
+        .cta-btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 20px;
+            border-radius: 6px; font-family: 'Fira Code', monospace; font-size: 0.85rem;
+            font-weight: 600; text-decoration: none; text-transform: uppercase; transition: all 0.3s ease;
+        }
+        .cta-btn svg { width: 18px; height: 18px; fill: currentColor; }
+        
+        .cta-primary { background: rgba(0, 255, 102, 0.1); color: var(--neon-primary); border: 1px solid var(--neon-primary); }
+        .cta-primary:hover { background: var(--neon-primary); color: #000; box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
+        
+        .cta-linkedin { background: rgba(0, 119, 181, 0.1); color: #00e5ff; border: 1px solid #00e5ff; }
+        .cta-linkedin:hover { background: #00e5ff; color: #000; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+
+        .cta-email { background: rgba(255, 0, 85, 0.1); color: var(--neon-secondary); border: 1px solid var(--neon-secondary); }
+        .cta-email:hover { background: var(--neon-secondary); color: #fff; box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); }
+
+        /* --- Interactive Terminal --- */
+        .terminal {
+            width: 100%; background: #050508; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0, 255, 102, 0.15);
+            overflow: hidden; position: relative; height: 450px; display: flex; flex-direction: column;
+        }
+        .terminal-header { background: #0f0f15; padding: 1rem; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .traffic-lights { display: flex; gap: 8px; }
+        .light { width: 12px; height: 12px; border-radius: 50%; }
+        .light.red { background: #ff5f56; } .light.yellow { background: #ffbd2e; } .light.green { background: #27c93f; }
+        .terminal-title { flex-grow: 1; text-align: center; color: var(--text-muted); font-size: 0.8rem; font-family: 'Fira Code', monospace; }
+        .terminal-body { padding: 2rem; flex-grow: 1; overflow-y: auto; font-family: 'Fira Code', monospace; font-size: 0.95rem; }
+        .output-line { color: var(--text-main); margin-bottom: 0.5rem; }
+        .highlight { color: var(--neon-primary); font-weight: 600; }
+        .highlight-yellow { color: var(--neon-yellow); font-weight: 600; }
+        .error { color: var(--neon-secondary); }
+        .cmd-line { margin-top: 1rem; display: none; align-items: center; } 
+        .prompt { color: var(--neon-accent); margin-right: 1rem; white-space: nowrap; }
+        .input-wrapper { display: flex; align-items: center; width: 100%; }
+        .terminal-input { background: transparent; border: none; color: #fff; font-family: 'Fira Code', monospace; font-size: 1rem; width: 100%; outline: none; caret-color: var(--neon-primary); }
+
+        /* --- Section Titles --- */
+        .section-header { margin: 8rem 0 4rem; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; color: #fff; line-height: 1.2; text-transform: uppercase; }
+        .section-header p { color: var(--neon-primary); font-family: 'Fira Code', monospace; margin-top: 1rem; }
+
+        /* --- Project Architecture Cards --- */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 8rem; }
+        .project-card {
+            background: var(--bg-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+            padding: 2.5rem; position: relative; transform-style: preserve-3d; transform: perspective(1000px);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover { border-color: rgba(0, 255, 102, 0.4); box-shadow: 0 0 30px rgba(0, 255, 102, 0.1); }
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; transform: translateZ(30px); }
+        .project-title { font-size: 1.5rem; color: #fff; font-family: 'Fira Code', monospace;}
+        .project-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; padding-left: 1rem; border-left: 2px solid var(--neon-accent); transform: translateZ(20px); }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; transform: translateZ(40px); margin-bottom: 2rem; }
+        .tech-stack img { height: 22px; border-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+
+        .btn-view {
+            display: block; text-align: right; color: var(--neon-primary); text-decoration: none;
+            font-family: 'Fira Code', monospace; font-size: 0.85rem; font-weight: bold; transition: all 0.3s;
+            transform: translateZ(30px); border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 1rem;
+            background: none; border-left: none; border-right: none; border-bottom: none; width: 100%;
+        }
+        .btn-view:hover { color: var(--neon-secondary); }
+
+        /* --- Full-Stack Pyramid --- */
+        .pyramid-container { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 8rem; }
+        .pyramid-tier { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px; padding: 20px; border: 2px solid #333; border-radius: 6px; font-weight: 900; color: #000; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .pyramid-tier:hover { transform: scale(1.05) translateY(-5px); border-color: #fff; }
+        .tier-top { width: 50%; background-color: var(--neon-secondary); box-shadow: 0 10px 30px rgba(255, 0, 85, 0.15); }
+        .tier-mid { width: 75%; background-color: var(--neon-yellow); box-shadow: 0 10px 30px rgba(255, 204, 0, 0.15); }
+        .tier-bot { width: 100%; background-color: var(--neon-primary); box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15); }
+        .pyramid-tier img { height: 28px; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .pyramid-tier img:hover { transform: translateY(-3px) scale(1.05); }
+        .tier-label { font-family: 'Fira Code', monospace; font-size: 0.8rem; letter-spacing: 1px; color: #000; margin-left: 10px;}
+
+        /* --- Contributions & Metrics --- */
+        .contributions-container {
+            background: #050508; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            padding: 2rem; margin-bottom: 8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center; overflow: hidden; position: relative;
+        }
+        .contributions-container::before {
+            content: 'SYSTEM.MONITOR("GITHUB_ACTIVITY");'; position: absolute; top: 10px; left: 20px;
+            color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.75rem;
+        }
+
+        .metrics-container {
+            background: #080812; border: 1px solid var(--neon-accent); padding: 4rem; border-radius: 12px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 8rem; position: relative;
+        }
+        .metrics-container::before {
+            content: 'SYSTEM.OUT.PRINTLN("METRICS_AND_EXPERIENCE");'; position: absolute; top: -12px; left: 40px;
+            background: var(--bg-base); padding: 0 10px; color: var(--neon-accent); font-family: 'Fira Code', monospace; font-size: 0.9rem;
+        }
+        .metric-group { margin-bottom: 2rem; }
+        .metric-header { display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #ccc; }
+        .metric-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+        .metric-fill { height: 100%; background: linear-gradient(90deg, transparent, var(--neon-primary)); width: 0; transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 15px var(--neon-primary); border-radius: 4px; }
+
+        /* --- Contact Form Section --- */
+        .contact-container {
+            max-width: 700px; margin: 0 auto 8rem auto; background: var(--bg-surface); padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative;
+        }
+        .contact-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--neon-primary), var(--neon-accent)); border-radius: 12px 12px 0 0;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; font-family: 'Fira Code', monospace; color: var(--neon-accent); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .form-input { width: 100%; background: #050508; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 1rem; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 1rem; transition: all 0.3s; outline: none; }
+        .form-input:focus { border-color: var(--neon-primary); box-shadow: 0 0 15px rgba(0, 255, 102, 0.1); }
+        textarea.form-input { resize: vertical; min-height: 120px; }
+
+        .btn-submit { display: inline-block; width: 100%; background: rgba(0, 255, 102, 0.1); color: var(--neon-primary); border: 1px solid var(--neon-primary); padding: 1.2rem; border-radius: 6px; font-family: 'Fira Code', monospace; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; transition: all 0.3s; cursor: pointer;}
+        .btn-submit:hover { background: var(--neon-primary); color: #000; box-shadow: 0 0 20px rgba(0, 255, 102, 0.3); }
+
+        /* --- PROJECT MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(8px);
+            z-index: 2000; display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: var(--bg-surface); border: 1px solid var(--neon-primary);
+            border-radius: 12px; width: 90%; max-width: 650px; padding: 3.5rem;
+            position: relative; box-shadow: 0 0 40px rgba(0, 255, 102, 0.15);
+            transform: translateY(20px); transition: transform 0.3s ease; display: flex; flex-direction: column;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none;
+            color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 1.2rem; transition: color 0.3s;
+        }
+        .modal-close:hover { color: var(--neon-secondary); }
+        .modal-title { font-family: 'Fira Code', monospace; color: #fff; margin-bottom: 2.5rem; font-size: 1.5rem;}
+        .modal-section { margin-bottom: 1.5rem; border-left: 2px solid; padding-left: 1.2rem;}
+        .modal-section h4 { font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 0.5rem; text-transform: uppercase;}
+        
+        .mod-prob { border-color: var(--neon-secondary); } .mod-prob h4 { color: var(--neon-secondary); }
+        .mod-tech { border-color: var(--neon-yellow); } .mod-tech h4 { color: var(--neon-yellow); }
+        .mod-out { border-color: var(--neon-primary); } .mod-out h4 { color: var(--neon-primary); }
+
+        .modal-actions { margin-top: 1rem; padding-top: 1.5rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; gap: 1rem; flex-wrap: wrap;}
+        .mod-btn-public { background: rgba(0, 255, 102, 0.1); color: var(--neon-primary); padding: 8px 16px; border: 1px solid var(--neon-primary); border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.8rem; text-decoration: none; transition: all 0.3s;}
+        .mod-btn-public:hover { background: var(--neon-primary); color: #000; box-shadow: 0 0 15px rgba(0, 255, 102, 0.3); }
+        .mod-btn-private { background: rgba(255, 0, 85, 0.05); color: var(--neon-secondary); padding: 8px 16px; border: 1px solid rgba(255, 0, 85, 0.3); border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.8rem; cursor: not-allowed; }
+
+        /* --- NEW: BLUEPRINT ARCHITECTURE MODAL --- */
+        .blueprint-content {
+            background: #020204; border: 1px solid var(--neon-accent);
+            border-radius: 12px; width: 95%; max-width: 1000px; padding: 2rem;
+            position: relative; box-shadow: 0 0 50px rgba(0, 229, 255, 0.15);
+            transform: translateY(20px); transition: transform 0.3s ease;
+            background-image: linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .modal-overlay.active .blueprint-content { transform: translateY(0); }
+        
+        .bp-pipeline-wrapper { overflow-x: auto; padding: 2rem 0; margin-top: 1rem;}
+        .bp-pipeline { display: flex; align-items: center; justify-content: center; min-width: 800px; }
+        
+        .bp-node {
+            background: rgba(0, 229, 255, 0.05); border: 1px solid var(--neon-accent);
+            padding: 1.2rem; border-radius: 8px; font-family: 'Fira Code', monospace;
+            color: #fff; text-align: center; font-weight: bold; font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(0,229,255,0.1); position: relative; z-index: 2;
+        }
+        .bp-node span { font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 5px; font-weight: 300;}
+        
+        .bp-cluster { display: flex; flex-direction: column; gap: 1.5rem; }
+        
+        .bp-flow { height: 2px; width: 50px; background: rgba(255,255,255,0.1); position: relative; z-index: 1;}
+        .bp-dot {
+            width: 8px; height: 8px; background: var(--neon-primary); border-radius: 50%;
+            position: absolute; top: -3px; animation: flowData 2s infinite linear;
+            box-shadow: 0 0 10px var(--neon-primary);
+        }
+        @keyframes flowData { 0% { left: 0; opacity: 0; } 10% {opacity: 1;} 90% {opacity: 1;} 100% { left: 100%; opacity: 0; } }
+
+        .bp-gateway { border-color: var(--neon-primary); box-shadow: 0 0 15px rgba(0,255,102,0.1); }
+        .bp-db { border-color: var(--neon-yellow); box-shadow: 0 0 15px rgba(255,204,0,0.1); }
+
+        /* --- Footer --- */
+        .footer { padding: 4rem 0; text-align: center; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .social-links { font-family: 'Fira Code', monospace; }
+        .social-links a { color: var(--text-muted); text-decoration: none; margin: 0 15px; transition: color 0.3s; }
+        .social-links a:hover { color: var(--neon-accent); }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; padding-top: 6rem;}
+            .hero-identity { align-items: center; }
+            .cta-group { justify-content: center; }
+            .metrics-container { grid-template-columns: 1fr; gap: 2rem; padding: 2rem;}
+            .projects-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .tier-top, .tier-mid, .tier-bot { width: 100%; }
+            .contact-container { padding: 2rem; }
+            .modal-content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav aria-label="Main Navigation">
+        <div class="logo">~/Neo<span>_</span>Sejwane</div>
+        <div class="nav-links">
+            <a href="#philosophy">./philosophy</a>
+            <a href="#projects">./projects</a>
+            <a href="#stack">./stack</a>
+            <a href="#metrics">./metrics</a>
+            <a href="#contributions">./activity</a>
+            <a href="#contact" class="contact-quick">> connect</a>
+            <a href="https://drive.google.com/file/d/1Bnb1_2GfaVmMIn4ITmyrjM4M-wXLYFg6/view?usp=sharing" target="_blank" class="btn-resume" aria-label="Download Resume">[ ./resume.pdf ]</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero container" aria-label="Introduction">
+        
+        <div class="hero-identity">
+            <div class="avatar-container">
+                <img src="https://github.com/Sejwane.png" alt="Neo Sejwane Profile" class="avatar">
+            </div>
+            <div>
+                <h1>Hi, I'm <span>Neo Sejwane</span>.</h1>
+                <h2>Full-Stack Developer & Analytical Problem Solver.</h2>
+            </div>
+            
+            <div class="cta-group">
+                <a href="https://drive.google.com/file/d/1Bnb1_2GfaVmMIn4ITmyrjM4M-wXLYFg6/view?usp=sharing" target="_blank" class="cta-btn cta-primary" aria-label="Download Resume">
+                    <svg viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/></svg>
+                    Resume.pdf
+                </a>
+                <a href="https://www.linkedin.com/in/neo-sejwane-098311372" target="_blank" class="cta-btn cta-linkedin" aria-label="LinkedIn">
+                    <svg viewBox="0 0 448 512"><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM448 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="#contact" class="cta-btn cta-email" aria-label="Email">
+                    <svg viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                    Email Me
+                </a>
+            </div>
+        </div>
+
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="traffic-lights">
+                    <div class="light red"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green"></div>
+                </div>
+                <div class="terminal-title">bash -- sejwane_os v2.0</div>
+            </div>
+            <div class="terminal-body" id="terminal-body" onclick="document.getElementById('cmd-input').focus()">
+                <div id="boot-sequence"></div>
+                <div class="cmd-line" id="interactive-cmd">
+                    <span class="prompt">visitor@sejwane:~$</span>
+                    <div class="input-wrapper">
+                        <input type="text" id="cmd-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal Command Input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="container" aria-label="Engineering Philosophy">
+        <div class="section-header">
+            <h2>System.Manifesto</h2>
+            <p>>> Engineering with business purpose</p>
+        </div>
+
+        <div class="contact-container" style="text-align: center; padding: 4rem 3rem;">
+            <p style="font-size: 1.25rem; line-height: 1.8; color: var(--text-main);">
+                "A system goes far beyond predictable CRUD operations. It is an orchestrated <strong style="color: var(--neon-primary);">collection of features that make business sense</strong>, working together seamlessly to solve specific, real-world business problems."
+            </p>
+        </div>
+    </section>
+
+    <section id="projects" class="container" aria-label="Projects">
+        <div class="section-header">
+            <h2>System Architecture<br>& Deployments</h2>
+            <p>> Translating business problems into scalable features</p>
+            
+            <button id="btn-view-topology" class="cta-btn cta-primary" style="margin: 2rem auto 0; display: inline-flex;">[ ⚙️ VIEW_SYSTEM_TOPOLOGY ]</button>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card js-tilt">
+                <div class="project-header">
+                    <h3 class="project-title">MedCare Ecosystem</h3>
+                    <span class="mono" style="color: var(--neon-accent);">01</span>
+                </div>
+                <div class="project-desc">
+                    Engineered backend services for a highly secure, multi-tenant healthcare SaaS. Focused on REST APIs, patient management, and strict data protection policies.
+                </div>
+                <div class="tech-stack">
+                    <img src="https://img.shields.io/badge/Java-000?style=flat-square&logoColor=00e5ff" alt="Java">
+                    <img src="https://img.shields.io/badge/Spring_Boot-000?style=flat-square&logo=springboot&logoColor=00e5ff" alt="Spring Boot">
+                    <img src="https://img.shields.io/badge/PostgreSQL-000?style=flat-square&logo=postgresql&logoColor=00e5ff" alt="PostgreSQL">
+                </div>
+                <button class="btn-view" data-project="medcare">[ EXECUTE: VIEW_LOGIC ]</button>
+            </div>
+
+            <div class="project-card js-tilt">
+                <div class="project-header">
+                    <h3 class="project-title">Battlefield Holdings</h3>
+                    <span class="mono" style="color: var(--neon-accent);">02</span>
+                </div>
+                <div class="project-desc">
+                    Designed, tested, and maintained critical backend applications. Streamlined API synchronization and optimized full-stack web infrastructure for scale.
+                </div>
+                <div class="tech-stack">
+                    <img src="https://img.shields.io/badge/React-000?style=flat-square&logo=react&logoColor=ffcc00" alt="React">
+                    <img src="https://img.shields.io/badge/Node.js-000?style=flat-square&logo=nodedotjs&logoColor=ffcc00" alt="Node.js">
+                    <img src="https://img.shields.io/badge/TypeScript-000?style=flat-square&logo=typescript&logoColor=ffcc00" alt="TypeScript">
+                </div>
+                <button class="btn-view" data-project="battlefield">[ EXECUTE: VIEW_LOGIC ]</button>
+            </div>
+
+            <div class="project-card js-tilt">
+                <div class="project-header">
+                    <h3 class="project-title">RescueHub SPCA</h3>
+                    <span class="mono" style="color: var(--neon-accent);">03</span>
+                </div>
+                <div class="project-desc">
+                    Architected a bespoke operational web app from scratch, handling complex data persistence workflows and highly secure access control.
+                </div>
+                <div class="tech-stack">
+                    <img src="https://img.shields.io/badge/PHP-000?style=flat-square&logo=php&logoColor=00ff66" alt="PHP">
+                    <img src="https://img.shields.io/badge/MySQL-000?style=flat-square&logo=mysql&logoColor=00ff66" alt="MySQL">
+                    <img src="https://img.shields.io/badge/Security-000?style=flat-square&logo=springsecurity&logoColor=00ff66" alt="Auth">
+                </div>
+                <button class="btn-view" data-project="rescuehub">[ EXECUTE: VIEW_LOGIC ]</button>
+            </div>
+
+            <div class="project-card js-tilt">
+                <div class="project-header">
+                    <h3 class="project-title">Maluti TVET Platform</h3>
+                    <span class="mono" style="color: var(--neon-accent);">04</span>
+                </div>
+                <div class="project-desc">
+                    Led the end-to-end digital transformation prototype, emphasizing performant translation of UI/UX requirements into a living frontend ecosystem.
+                </div>
+                <div class="tech-stack">
+                    <img src="https://img.shields.io/badge/Next.js-000?style=flat-square&logo=nextdotjs&logoColor=ff0055" alt="Next.js">
+                    <img src="https://img.shields.io/badge/Tailwind-000?style=flat-square&logo=tailwindcss&logoColor=ff0055" alt="Tailwind">
+                    <img src="https://img.shields.io/badge/Java-000?style=flat-square&logo=java&logoColor=ff0055" alt="Java">
+                </div>
+                <button class="btn-view" data-project="maluti">[ EXECUTE: VIEW_LOGIC ]</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="stack" class="container" aria-label="Technology Stack">
+        <div class="section-header">
+            <h2>The Full-Stack Pyramid</h2>
+            <p>>> Architecture built on SOLID principles</p>
+        </div>
+        <div class="pyramid-container">
+            <div class="pyramid-tier tier-top" title="Building dynamic, responsive UI/UX">
+                <img src="https://img.shields.io/badge/React-000?style=for-the-badge&logo=react&logoColor=00e5ff" alt="React">
+                <img src="https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=nextdotjs&logoColor=00e5ff" alt="Next.js">
+                <img src="https://img.shields.io/badge/TypeScript-000?style=for-the-badge&logo=typescript&logoColor=00e5ff" alt="TypeScript">
+                <img src="https://img.shields.io/badge/Tailwind-000?style=for-the-badge&logo=tailwindcss&logoColor=00e5ff" alt="Tailwind CSS">
+                <div class="tier-label">INTERACTIVE</div>
+            </div>
+            <div class="pyramid-tier tier-mid" title="Developing secure APIs and Microservices">
+                <img src="https://img.shields.io/badge/Java-000?style=for-the-badge&logoColor=ff0055" alt="Java">
+                <img src="https://img.shields.io/badge/Spring_Boot-000?style=for-the-badge&logo=springboot&logoColor=ff0055" alt="Spring Boot">
+                <img src="https://img.shields.io/badge/C%23-000?style=for-the-badge&logo=csharp&logoColor=ff0055" alt="C#">
+                <div class="tier-label">CORE LOGIC</div>
+            </div>
+            <div class="pyramid-tier tier-bot" title="Deploying and managing scalable environments">
+                <img src="https://img.shields.io/badge/PostgreSQL-000?style=for-the-badge&logo=postgresql&logoColor=ffcc00" alt="PostgreSQL">
+                <img src="https://img.shields.io/badge/Docker-000?style=for-the-badge&logo=docker&logoColor=ffcc00" alt="Docker">
+                <img src="https://img.shields.io/badge/CI%2FCD-000?style=for-the-badge&logo=githubactions&logoColor=ffcc00" alt="CI/CD">
+                <img src="https://img.shields.io/badge/AWS-000?style=for-the-badge&logo=amazonaws&logoColor=ffcc00" alt="AWS">
+                <div class="tier-label">FOUNDATION</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="metrics" class="container" aria-label="Experience Metrics">
+        <div class="section-header">
+            <h2>Core Competencies</h2>
+            <p>> Built on strict testing & real-world application</p>
+        </div>
+
+        <div class="metrics-container" id="metrics-section">
+            <div>
+                <div class="metric-group">
+                    <div class="metric-header">
+                        <span>Backend (Java / Spring Boot)</span>
+                        <span style="color: var(--neon-primary);">2+ Years</span>
+                    </div>
+                    <div class="metric-bar-bg"><div class="metric-fill" data-target="80%"></div></div>
+                </div>
+                <div class="metric-group">
+                    <div class="metric-header">
+                        <span>System Architecture & APIs</span>
+                        <span style="color: var(--neon-primary);">Enterprise Level</span>
+                    </div>
+                    <div class="metric-bar-bg"><div class="metric-fill" data-target="90%"></div></div>
+                </div>
+                <div class="metric-group">
+                    <div class="metric-header">
+                        <span>Cloud / DevOps (AWS / Docker)</span>
+                        <span style="color: var(--neon-primary);">3 Deployments</span>
+                    </div>
+                    <div class="metric-bar-bg"><div class="metric-fill" data-target="70%"></div></div>
+                </div>
+            </div>
+            <div>
+                <div class="metric-group">
+                    <div class="metric-header">
+                        <span>Clean Code & OOP</span>
+                        <span style="color: var(--neon-primary);">Strict Adherence</span>
+                    </div>
+                    <div class="metric-bar-bg"><div class="metric-fill" data-target="100%"></div></div>
+                </div>
+                <div class="metric-group">
+                    <div class="metric-header">
+                        <span>Frontend (React / Next.js)</span>
+                        <span style="color: var(--neon-primary);">3 Projects</span>
+                    </div>
+                    <div class="metric-bar-bg"><div class="metric-fill" data-target="75%"></div></div>
+                </div>
+                <div class="metric-group">
+                    <div class="metric-header">
+                        <span>Data Security / Access Control</span>
+                        <span style="color: var(--neon-primary);">Regulated Systems</span>
+                    </div>
+                    <div class="metric-bar-bg"><div class="metric-fill" data-target="85%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contributions" class="container" aria-label="GitHub Activity">
+        <div class="section-header">
+            <h2>Commit Matrix</h2>
+            <p>>> Consistency is the ultimate architecture</p>
+        </div>
+        <div class="contributions-container">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Sejwane/Sejwane/output/github-snake-dark.svg">
+                <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Sejwane/Sejwane/output/github-snake.svg">
+                <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/Sejwane/Sejwane/output/github-snake.svg" style="width: 100%; max-width: 800px;">
+            </picture>
+        </div>
+    </section>
+
+    <section id="contact" class="container" aria-label="Contact Form">
+        <div class="section-header">
+            <h2>Initialize Contact</h2>
+            <p>>> Open a secure channel</p>
+        </div>
+        <div class="contact-container">
+            <form id="contact-form" action="https://formspree.io/f/mkolkbwj" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="userName">> user.name</label>
+                    <input type="text" id="userName" name="name" class="form-input" placeholder="Enter your name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="userEmail">> user.email</label>
+                    <input type="email" id="userEmail" name="email" class="form-input" placeholder="Enter your email address" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="userMessage">> system.payload</label>
+                    <textarea id="userMessage" name="message" class="form-input" placeholder="Enter your message..." required aria-required="true"></textarea>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">Execute Send</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<div class="modal-overlay" id="projectModal">
+    <div class="modal-content">
+        <button class="modal-close" id="closeModal">[ X ]</button>
+        <h3 class="modal-title" id="modalTitle">Project Title</h3>
+        
+        <div class="modal-section mod-prob">
+            <h4>> The Business Problem</h4>
+            <p id="modalProblem" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+        </div>
+        
+        <div class="modal-section mod-tech">
+            <h4>> The Technical Solution</h4>
+            <p id="modalSolution" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+        </div>
+        
+        <div class="modal-section mod-out">
+            <h4>> The Outcome</h4>
+            <p id="modalOutcome" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+        </div>
+        
+        <div class="modal-actions" id="modalActions">
+            </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="blueprintModal">
+    <div class="blueprint-content">
+        <button class="modal-close" id="closeBlueprint">[ X ]</button>
+        <h3 class="modal-title" style="color: var(--neon-accent); margin-bottom: 0;">>> SYSTEM_TOPOLOGY_VISUALIZER</h3>
+        
+        <div class="bp-pipeline-wrapper">
+            <div class="bp-pipeline">
+                <div class="bp-node">CLIENT<br><span>Web / Mobile UI</span></div>
+                
+                <div class="bp-flow"><div class="bp-dot"></div></div>
+                
+                <div class="bp-node bp-gateway">API GATEWAY<br><span>Load Balancer / Proxy</span></div>
+                
+                <div class="bp-flow"><div class="bp-dot"></div></div>
+                
+                <div class="bp-cluster">
+                    <div class="bp-node">AUTH SERVICE<br><span>JWT / OAuth2</span></div>
+                    <div class="bp-node" style="border-color: var(--neon-primary);">CORE SERVICES<br><span>Business Logic</span></div>
+                    <div class="bp-node">WORKER NODES<br><span>Async Tasks / Queue</span></div>
+                </div>
+                
+                <div class="bp-flow"><div class="bp-dot"></div></div>
+                
+                <div class="bp-cluster">
+                    <div class="bp-node bp-db">POSTGRESQL<br><span>Relational DB Cluster</span></div>
+                    <div class="bp-node" style="border-color: var(--neon-yellow);">REDIS CACHE<br><span>In-Memory Storage</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <p style="color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.85rem; text-align: center; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 1rem;">
+            * Demonstrating a scalable, decoupled backend architecture built to handle high-throughput enterprise traffic.
+        </p>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="social-links">
+        <a href="https://github.com/Sejwane" target="_blank" aria-label="GitHub Profile">[ github.com/Sejwane ]</a>
+        <a href="mailto:sejwanebls@gmail.com" aria-label="Email">[ sejwanebls@gmail.com ]</a>
+    </div>
+</footer>
+
+<script>
+    /* =========================================
+       1. AI TERMINAL BOOT SEQUENCE & LOGIC 
+    ========================================= */
+    const bootSequence = [
+        "Initializing sejwane_os v2.0...",
+        "Loading dependencies: [████████████████████] 100%",
+        "Establishing secure connection...",
+        "<span class='highlight-yellow'>[WARN]</span> Standard portfolio detected. Upgrading to <span class='highlight'>AI Assistant Mode</span>."
+    ];
+
+    const bootContainer = document.getElementById('boot-sequence');
+    const interactiveCmd = document.getElementById('interactive-cmd');
+    const terminalInput = document.getElementById('cmd-input');
+    const terminalBody = document.getElementById('terminal-body');
+
+    let bootIndex = 0;
+
+    function runBootSequence() {
+        if (bootIndex < bootSequence.length) {
+            const line = document.createElement('div');
+            line.className = 'output-line';
+            line.innerHTML = bootSequence[bootIndex];
+            bootContainer.appendChild(line);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+            bootIndex++;
+            setTimeout(runBootSequence, 150 + (Math.random() * 200)); 
+        } else {
+            interactiveCmd.style.display = 'flex';
+            setTimeout(() => {
+                terminalInput.value = 'help';
+                const enterEvent = new KeyboardEvent('keypress', { key: 'Enter' });
+                terminalInput.dispatchEvent(enterEvent);
+            }, 300);
+        }
+    }
+    setTimeout(runBootSequence, 300);
+
+    const commands = {
+        'help': '<span style="color: var(--neon-accent);">[AI_AGENT]: Greetings. I am the Sejwane Portfolio Assistant. How can I help you today?</span><br><br> Available commands: <br> - <span class="highlight">whoami</span> : Read Neo\'s engineering philosophy<br> - <span class="highlight">skills</span> : List technical stack<br> - <span class="highlight">contact</span> : Open communication channels<br> - <span class="highlight">download cv</span> : Fetch resume payload<br> - <span class="highlight-yellow">run architecture</span> : Deploy System Design visualizer<br> - <span class="highlight">clear</span>  : Clear terminal output',
+        
+        'contact': '<span style="color: var(--neon-accent);">[AI_AGENT]: Opening comms channels...</span><br> - <span class="highlight">Email:</span> <a href="mailto:sejwanebls@gmail.com" style="color: #fff; text-decoration: underline;">sejwanebls@gmail.com</a><br> - <span class="highlight">LinkedIn:</span> <a href="https://www.linkedin.com/in/neo-sejwane-098311372" target="_blank" style="color: #fff; text-decoration: underline;">Neo Sejwane</a><br> - <span class="highlight">Direct:</span> Scroll down to the <a href="#contact" style="color: #fff; text-decoration: underline;">Secure Payload Form</a>.',
+        
+        'whoami': '<span style="color: var(--neon-accent);">[AI_AGENT]: Loading profile data...</span><br>Neo is a passionate Junior Full-Stack Developer. His engineering philosophy is simple: beyond just predictable CRUD operations, a system is basically a collection of features that make business sense working together to solve a specific business function. As an engineer, he specializes in writing clean code, building robust backend systems, and translating these business needs into scalable technical realities.',
+        
+        'skills': 'JAVA | SPRING BOOT | C# | REACT | NEXT.JS | TYPESCRIPT | POSTGRESQL | DOCKER | AWS',
+        
+        'download cv': 'Initiating secure download protocol... <br><a href="https://drive.google.com/file/d/1Bnb1_2GfaVmMIn4ITmyrjM4M-wXLYFg6/view?usp=sharing" target="_blank" style="color: var(--neon-accent); text-decoration: underline; cursor: pointer;">[ Click here to view Resume.pdf ]</a>',
+        
+        'hire': '<span style="color: var(--neon-primary);">[AI_AGENT]: Exceptional choice. Initiating fast-track hiring protocol. Scroll down to the secure payload form or email sejwanebls@gmail.com directly with the offer letter.</span>',
+        'coffee': '<span style="color: var(--neon-yellow);">[AI_AGENT]: Error 418 - I am a teapot. However, Neo runs on Americanos and clean code. Proceeding to compile caffeine...</span>',
+        'sudo': '<span class="error">[AI_AGENT]: Nice try. This incident will be reported.</span>',
+        
+        'clear': ''
+    };
+
+    function appendTerminalOutput(text) {
+        const line = document.createElement('div');
+        line.className = 'output-line';
+        line.innerHTML = text;
+        terminalBody.insertBefore(line, interactiveCmd);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    terminalInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const cmd = this.value.trim().toLowerCase();
+            this.value = ''; 
+            const cmdEcho = document.createElement('div');
+            cmdEcho.className = 'output-line';
+            cmdEcho.innerHTML = `<span class="prompt">visitor@sejwane:~$</span> ${cmd}`;
+            terminalBody.insertBefore(cmdEcho, interactiveCmd);
+
+            if (cmd === 'clear') {
+                bootContainer.innerHTML = '';
+                const outputs = terminalBody.querySelectorAll('.output-line:not(#boot-sequence .output-line)');
+                outputs.forEach(node => { if (node !== cmdEcho) node.remove(); });
+                cmdEcho.remove();
+            } else if (cmd === 'run architecture') {
+                appendTerminalOutput('<span style="color: var(--neon-accent);">[AI_AGENT]: Deploying Interactive Architecture Blueprint...</span>');
+                document.getElementById('blueprintModal').classList.add('active');
+            } else if (cmd !== '') {
+                const responseText = commands[cmd] || `bash: ${cmd}: command not found. Type 'help'.`;
+                appendTerminalOutput(responseText);
+            }
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+    });
+
+    /* =========================================
+       2. MODAL LOGIC & REPO LINKS
+    ========================================= */
+    const projectData = {
+        'medcare': {
+            title: 'MedCare Ecosystem',
+            problem: 'Healthcare administrators lacked a unified, highly-secure environment to manage multi-tenant patient data across different clinics without risking data leaks.',
+            solution: 'Architected a robust <strong>Java/Spring Boot</strong> microservice backend implementing strict <strong>Role-Based Access Control (RBAC)</strong> and data isolation protocols backed by <strong>PostgreSQL</strong>.',
+            outcome: 'Delivered a scalable, audit-ready backend that securely isolates clinic data while maintaining sub-second API response times.',
+            actions: [
+                { type: 'public', text: '[ 🔓 VIEW_BACKEND_SOURCE ]', url: 'https://github.com/Sejwane/medcare-backend' }
+            ]
+        },
+        'battlefield': {
+            title: 'Battlefield Holdings',
+            problem: 'The holding company required a unified digital infrastructure to handle high-traffic interactions across multiple subsidiary businesses seamlessly.',
+            solution: 'Built a full-stack infrastructure utilizing <strong>React</strong> on the frontend and <strong>Node.js / AWS</strong> for robust, auto-scaling API synchronization and deployment.',
+            outcome: 'Streamlined subsidiary operations into a single deployable ecosystem, significantly reducing DevOps overhead and downtime.',
+            actions: [
+                { type: 'private', text: '[ 🔒 ENTERPRISE_CODE_RESTRICTED ]', url: '#' },
+                { type: 'public', text: '[ 🔓 VIEW_B2B_MODULE ]', url: 'https://github.com/Sejwane/the-battlefield-b2b' },
+                { type: 'public', text: '[ 🔓 VIEW_FRONTEND_FOUNDATION ]', url: 'https://github.com/Sejwane/the-battlefield' }
+            ]
+        },
+        'rescuehub': {
+            title: 'RescueHub SPCA',
+            problem: 'The local SPCA was overwhelmed with manual paperwork for animal intakes, adoptions, and secure volunteer access tracking.',
+            solution: 'Engineered a bespoke <strong>PHP / MySQL</strong> backend architecture. While the UI is utilitarian, the core focus was handling complex, relational data persistence and <strong>encrypted authentication</strong> for staff.',
+            outcome: 'Completely digitized their intake pipeline, reducing administrative bottlenecks and creating a secure, searchable database of shelter animals.',
+            actions: [
+                { type: 'public', text: '[ 🔓 VIEW_SOURCE ]', url: 'https://github.com/Sejwane/RescueHub' } 
+            ]
+        },
+        'maluti': {
+            title: 'Maluti TVET Platform',
+            problem: 'Students and faculty struggled with an outdated, non-responsive interface that hindered educational access and digital communication.',
+            solution: 'Spearheaded the UI/UX digital transformation using <strong>Next.js, React,</strong> and <strong>Tailwind CSS</strong> to create a highly performant, accessible prototype.',
+            outcome: 'Successfully translated complex academic requirements into a living, responsive frontend ecosystem ready for backend integration.',
+            actions: [
+                { type: 'private', text: '[ 🔒 ORG_CODE_RESTRICTED (PROPRIETARY) ]', url: '#' }
+            ]
+        }
+    };
+
+    const modal = document.getElementById('projectModal');
+    const closeBtn = document.getElementById('closeModal');
+    const viewButtons = document.querySelectorAll('.btn-view');
+    const actionsContainer = document.getElementById('modalActions');
+
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const projectId = btn.getAttribute('data-project');
+            const data = projectData[projectId];
+            
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalProblem').innerHTML = data.problem;
+            document.getElementById('modalSolution').innerHTML = data.solution;
+            document.getElementById('modalOutcome').innerHTML = data.outcome;
+            
+            actionsContainer.innerHTML = ''; 
+            data.actions.forEach(action => {
+                if(action.type === 'public') {
+                    actionsContainer.innerHTML += `<a href="${action.url}" target="_blank" class="mod-btn-public">${action.text}</a>`;
+                } else {
+                    actionsContainer.innerHTML += `<span class="mod-btn-private">${action.text}</span>`;
+                }
+            });
+            
+            modal.classList.add('active');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    
+    // BLUEPRINT MODAL GUI LOGIC
+    const blueprintModal = document.getElementById('blueprintModal');
+    const closeBlueprint = document.getElementById('closeBlueprint');
+    const btnViewTopology = document.getElementById('btn-view-topology');
+    
+    if (btnViewTopology) {
+        btnViewTopology.addEventListener('click', (e) => {
+            e.preventDefault();
+            blueprintModal.classList.add('active');
+            appendTerminalOutput('<span style="color: var(--neon-accent);">[AI_AGENT]: Deploying Interactive Architecture Blueprint via GUI override...</span>');
+        });
+    }
+
+    closeBlueprint.addEventListener('click', () => blueprintModal.classList.remove('active'));
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+        if (e.target === blueprintModal) blueprintModal.classList.remove('active');
+    });
+
+    /* =========================================
+       3. METRICS ANIMATION OBSERVER
+    ========================================= */
+    const observerOptions = { threshold: 0.5 };
+    const matrixObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bars = entry.target.querySelectorAll('.metric-fill');
+                bars.forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-target');
+                });
+                matrixObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const statsBoard = document.getElementById('metrics-section');
+    if(statsBoard) matrixObserver.observe(statsBoard);
+
+    /* =========================================
+       4. CONTACT FORM PIPELINE WITH FETCH API
+    ========================================= */
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submitBtn');
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); 
+        
+        const sender = document.getElementById('userName').value;
+        const actionUrl = contactForm.getAttribute('action');
+        
+        submitBtn.innerText = 'EXECUTING_PAYLOAD...';
+        submitBtn.style.opacity = '0.7';
+
+        if(actionUrl.includes('YOUR_FORMSPREE_ENDPOINT')) {
+            setTimeout(() => {
+                triggerSuccess(sender);
+                appendTerminalOutput(`<span class="error">[ERROR]</span> Formspree Endpoint not configured yet. This was a simulation.`);
+            }, 1500);
+        } else {
+            const formData = new FormData(contactForm);
+            try {
+                const response = await fetch(actionUrl, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if(response.ok) {
+                    triggerSuccess(sender);
+                } else {
+                    submitBtn.innerText = 'PAYLOAD FAILED';
+                    submitBtn.style.background = 'var(--neon-secondary)';
+                }
+            } catch (error) {
+                submitBtn.innerText = 'NETWORK ERROR';
+                submitBtn.style.background = 'var(--neon-secondary)';
+            }
+        }
+    });
+
+    function triggerSuccess(sender) {
+        submitBtn.innerText = 'PAYLOAD DELIVERED';
+        submitBtn.style.background = 'var(--neon-primary)';
+        submitBtn.style.color = '#000';
+        appendTerminalOutput(`<span class="highlight">[SYSTEM]</span> Message payload received from user.name: <span class="highlight-yellow">${sender}</span>. Awaiting manual review.`);
+        contactForm.reset();
+
+        setTimeout(() => {
+            submitBtn.innerText = 'Execute Send';
+            submitBtn.style.background = 'rgba(0, 255, 102, 0.1)';
+            submitBtn.style.color = 'var(--neon-primary)';
+            submitBtn.style.opacity = '1';
+        }, 3000);
+    }
+
+    /* =========================================
+       5. 3D TILT EFFECT ON CARDS 
+    ========================================= */
+    const cards = document.querySelectorAll('.js-tilt');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+            const centerX = rect.width / 2; const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -10; const rotateY = ((x - centerX) / centerX) * 10;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    });
+
+</script>
+
+</body>
+</html>
